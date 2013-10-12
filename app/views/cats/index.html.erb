@@ -1,0 +1,19 @@
+<h1>Cats</h1>
+<table border="1">
+	<tr>
+		<td>Name</td>
+		<td>Color</td>
+		<td>Age</td>
+	</tr>
+	<%@cats.each do |cat|%>
+	<tr>
+		<td><%=cat.name%></td>
+		<td><%=cat.color%></td>
+		<td><%=cat.age%></td>
+    <td><%= button_to "Learn more!", cat_url(cat.id), :method => :get %>
+	</tr>
+	<%end%>
+</table>
+
+<br>
+<%= button_to "Submit your own cat!", new_cat_url, :method => :get %>

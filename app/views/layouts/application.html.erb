@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cats</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<% if logged_in? %>
+  <%= "You are currently logged in as: #{current_user.user_name}" %>
+  <%= button_to "Log out", session_url, :method => :delete %>
+<% else %>
+  <%= button_to "Log in", new_session_url, :method => :get %>
+  <%= button_to "Register now!", new_user_url, :method => :get %>
+<% end %>
+<br>
+
+<% if !!flash[:errors] %>
+  <ul>
+    <% flash[:errors].each do |error|%>
+    <li><%= error %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= yield %>
+
+</body>
+</html>

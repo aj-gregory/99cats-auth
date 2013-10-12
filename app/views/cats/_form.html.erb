@@ -1,0 +1,49 @@
+<% action_url = (action == :new) ? cats_url : cat_url(@cat) %>
+
+<form action="<%= action_url %>" method="post">
+	<% if action == :edit %>
+		<input type="hidden" name="_method" value="put">
+	<% end %>
+
+  <input type="hidden"
+         name="authenticity_token"
+         value="<% form_authenticity_token %>">
+
+	<label for="cat_name">Name: </label>
+	<input type="text" name="cat[name]" id="cat_name" value="<%= @cat.name %>"><br>
+
+	<label for="cat_age">Age: </label>
+	<input type="text" name="cat[age]" id="cat_age" value="<%= @cat.age %>"><br>
+
+	<% if @cat.sex == 'M' %>
+	<% 	male = "checked='checked'" %>
+	<% elsif @cat.sex == 'F' %>
+	<% 	female = "checked='checked'" %>
+	<% end %>
+
+	<label for="cat_sex_female">Female: </label>
+	<input type="radio" name="cat[sex]" id="cat_sex_female" value="F" <%= "#{female}" %>>
+	<label for="cat_sex_male">Male: </label>
+	<input type="radio" name="cat[sex]" id="cat_sex_male" value="M" <%= "#{male}" %> ><br>
+
+	<% if @cat.color == 'red' %>
+	<% 	red = "selected" %>
+	<% elsif @cat.color == 'blue' %>
+	<% 	blue = "selected" %>
+	<% elsif @cat.color == 'green' %>
+	<% 	green = "selected" %>
+	<% end %>
+
+	<label for="cat_color">Color: </label>
+	<select name="cat[color]" id="cat_color">
+		<option value="red" <%= red %>>Red</option>
+		<option value="blue" <%= blue %>>Blue</option>
+		<option value="green" <%= green %>>Green</option>
+	</select>
+	<br>
+
+  <label for="cat_birth_date">Birth Date: </label>
+	<input type="date" name="cat[birth_date]" id="cat_birth_date" value="<%= @cat.birth_date %>"><br>
+
+	<input type="submit" value="Submit Cat!">
+</form>
